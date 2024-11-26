@@ -12,6 +12,14 @@ export default defineConfig({
     vueDevTools(),
     nightwatchPlugin(),
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern',
+        prependData: '@use "@/app/styles/_variables.scss";\n'
+      }
+    }
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
