@@ -1,9 +1,11 @@
-import { fileURLToPath, URL } from 'node:url'
+import { fileURLToPath, URL } from 'node:url';
 
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import vueDevTools from 'vite-plugin-vue-devtools'
-import nightwatchPlugin from 'vite-plugin-nightwatch'
+import { PrimeVueResolver } from '@primevue/auto-import-resolver';
+import vue from '@vitejs/plugin-vue';
+import Components from 'unplugin-vue-components/vite';
+import { defineConfig } from 'vite';
+import nightwatchPlugin from 'vite-plugin-nightwatch';
+import vueDevTools from 'vite-plugin-vue-devtools';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -11,18 +13,21 @@ export default defineConfig({
     vue(),
     vueDevTools(),
     nightwatchPlugin(),
+    Components({
+      resolvers: [PrimeVueResolver()],
+    }),
   ],
   css: {
     preprocessorOptions: {
       scss: {
         api: 'modern',
-        prependData: '@use "@/app/styles/_variables.scss";\n'
-      }
-    }
+        prependData: '@use "@/app/styles/_variables.scss";\n',
+      },
+    },
   },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-})
+});
