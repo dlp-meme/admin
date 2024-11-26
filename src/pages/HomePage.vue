@@ -11,9 +11,3 @@ const color = ref('#ff0000');
   <Button>PrimeVue test</Button>
   <ColorPicker v-model="color" />
 </template>
-
-<style lange="scss" scoped>
-h1 {
-  color: red;
-}
-</style>
